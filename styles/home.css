@@ -947,8 +947,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    /* Padding ko kam karke button ko patla/compact kiya gaya hai */
     padding: 8px 18px;
     min-height: 38px;
 
@@ -959,7 +957,7 @@
     color: var(--pa-text);
 
     font-weight: 600;
-    font-size: 0.88rem; /* Text size bhi thoda balance kiya gaya hai */
+    font-size: 0.88rem; 
     text-decoration: none;
 
     transition: .25s ease;
