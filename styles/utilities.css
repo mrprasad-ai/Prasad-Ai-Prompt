@@ -1,0 +1,166 @@
+/* ==========================================================
+   DISPLAY UTILITIES
+========================================================== */
+
+.pa-hidden       { display: none; }
+.pa-block        { display: block; }
+.pa-inline       { display: inline; }
+.pa-inline-block { display: inline-block; }
+.pa-inline-flex  { display: inline-flex; }
+.pa-flex         { display: flex; }
+.pa-grid         { display: grid; }
+
+/* ==========================================================
+   POSITION
+========================================================== */
+
+.pa-relative { position: relative; }
+.pa-absolute { position: absolute; }
+.pa-fixed    { position: fixed; }
+.pa-sticky   { position: sticky; }
+
+/* ==========================================================
+   WIDTH / HEIGHT
+========================================================== */
+
+.pa-w-full      { width: 100%; }
+.pa-w-auto      { width: auto; }
+.pa-h-full      { height: 100%; }
+.pa-h-auto      { height: auto; }
+.pa-min-h-screen{ min-height: 100vh; }
+
+/* ==========================================================
+   TEXT UTILITIES
+========================================================== */
+
+.pa-text-left    { text-align: left; }
+.pa-text-center  { text-align: center; }
+.pa-text-right   { text-align: right; }
+.pa-text-justify { text-align: justify; }
+.pa-text-nowrap  { white-space: nowrap; }
+.pa-text-wrap    { white-space: normal; }
+
+.pa-text-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================
+   FLEX UTILITIES
+========================================================== */
+
+.pa-flex-1      { flex: 1 1 0%; }
+.pa-flex-auto   { flex: auto; }
+.pa-flex-none   { flex: none; }
+.pa-flex-wrap   { flex-wrap: wrap; }
+.pa-flex-nowrap { flex-wrap: nowrap; }
+
+.pa-grow        { flex-grow: 1; }
+.pa-grow-0      { flex-grow: 0; }
+.pa-shrink      { flex-shrink: 1; }
+.pa-shrink-0    { flex-shrink: 0; }
+
+/* ==========================================================
+   SPACING & MARGINS
+========================================================== */
+
+.pa-mx-auto { margin-inline: auto; }
+.pa-ml-auto { margin-left: auto; }
+.pa-mr-auto { margin-right: auto; }
+.pa-p-0     { padding: 0; }
+.pa-m-0     { margin: 0; }
+
+/* ==========================================================
+   BORDER RADIUS
+========================================================== */
+
+.pa-rounded-none { border-radius: 0; }
+.pa-rounded-xs   { border-radius: var(--pa-radius-xs); }
+.pa-rounded-sm   { border-radius: var(--pa-radius-sm); }
+.pa-rounded-md   { border-radius: var(--pa-radius-md); }
+.pa-rounded-lg   { border-radius: var(--pa-radius-lg); }
+.pa-rounded-xl   { border-radius: var(--pa-radius-xl); }
+.pa-rounded-2xl  { border-radius: calc(var(--pa-radius-xl) + 8px); }
+.pa-rounded-full { border-radius: 9999px; }
+
+/* ==========================================================
+   SHADOW
+========================================================== */
+
+.pa-shadow-none { box-shadow: none; }
+.pa-shadow-sm   { box-shadow: var(--pa-shadow-sm); }
+.pa-shadow-md   { box-shadow: var(--pa-shadow-md); }
+.pa-shadow-lg   { box-shadow: var(--pa-shadow-lg); }
+.pa-shadow-xl   { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16); }
+
+/* ==========================================================
+   OVERFLOW & CURSOR
+========================================================== */
+
+.pa-overflow-hidden { overflow: hidden; }
+.pa-overflow-auto   { overflow: auto; }
+.pa-overflow-x-auto { overflow-x: auto; }
+.pa-overflow-y-auto { overflow-y: auto; }
+
+.pa-cursor-pointer     { cursor: pointer; }
+.pa-cursor-default     { cursor: default; }
+.pa-cursor-not-allowed { cursor: not-allowed; }
+
+.pa-select-none { user-select: none; }
+.pa-select-all  { user-select: all; }
+.pa-select-text { user-select: text; }
+
+/* ==========================================================
+   TRANSITION & OBJECT FIT
+========================================================== */
+
+.pa-transition      { transition: var(--pa-transition); }
+.pa-transition-fast { transition: 0.2s ease; }
+.pa-transition-slow { transition: 0.4s ease; }
+
+.pa-object-cover   { object-fit: cover; }
+.pa-object-contain { object-fit: contain; }
+.pa-object-fill    { object-fit: fill; }
+.pa-object-center { object-position: center; }
+
+.pa-img-responsive {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================================================
+   RESPONSIVE DISPLAY UTILITIES
+========================================================== */
+
+@media (max-width: 1200px) {
+  .pa-desktop-only { display: none; }
+}
+
+@media (max-width: 992px) {
+  .pa-tablet-hidden { display: none; }
+  .pa-tablet-block  { display: block; }
+  .pa-tablet-flex   { display: flex; }
+}
+
+@media (max-width: 768px) {
+  .pa-mobile-hidden       { display: none; }
+  .pa-mobile-block        { display: block; }
+  .pa-mobile-inline-block { display: inline-block; }
+  .pa-mobile-flex         { display: flex; }
+  .pa-mobile-grid         { display: grid; }
+}
+
+@media (min-width: 769px) {
+  .pa-mobile-only { display: none; }
+}
+
+@media (min-width: 993px) {
+  .pa-tablet-only { display: none; }
+}
+
+@media (min-width: 1201px) {
+  .pa-desktop-block { display: block; }
+  .pa-desktop-flex  { display: flex; }
+}

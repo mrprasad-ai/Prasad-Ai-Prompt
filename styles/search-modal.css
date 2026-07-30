@@ -1,0 +1,255 @@
+/* ==========================================
+   Search Modal - Modern & Compact Overlay
+   ========================================== */
+
+/* Overlay Background with Blur */
+.pa-search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+/* Central Modal Box */
+.pa-search-modal {
+  width: 100%;
+  max-width: 880px;
+  background: rgba(247, 248, 255, 0.97);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  margin: 0 16px;
+  animation: modalSlideDown 0.2s ease-out;
+}
+
+@keyframes modalSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Layout Alignment */
+.pa-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.pa-search-icon {
+  color: #0f66fc;
+  flex-shrink: 0;
+}
+
+.pa-search-input-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: #111827;
+  background: transparent;
+}
+
+.pa-search-input-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+/* Single Top Close Button */
+.pa-search-modal-close {
+  background: #92929215;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #393939;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pa-search-modal-close:hover {
+  background: #b4b4b4;
+  color: #ff0303;
+}
+
+/* Modal Body Section */
+.pa-search-body {
+  padding: 16px;
+}
+
+.trending-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.trending-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-item {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #e6ecf7;
+  border: 1px solid rgb(167, 193, 246);
+  color: #374151;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag-item:hover {
+  background: linear-gradient(135deg, #3b82f6, #8b25eb);
+  color: #ffffff;
+}
+
+/* Bottom Action Row Alignment */
+.pa-search-action-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 2px;
+}
+
+/* Left Side Suggestion Text (Prevents Vertical Letter Break) */
+.pa-search-suggestion-text {
+  font-size: 0.88rem;
+  color: #2563eb;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 68%;
+  display: inline-block;
+  word-break: break-word;
+}
+
+.pa-search-suggestion-text strong {
+  font-weight: 600;
+}
+
+.pa-search-suggestion-text:hover {
+  text-decoration: underline;
+}
+
+/* 🎯 Sleek Corner CTA Button (Desktop) */
+.pa-search-corner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: unset;
+  box-shadow: none;
+}
+
+/* 📱 Mobile Specific Fixes (screen width <= 640px) */
+@media (max-width: 768px) {
+  .pa-search-overlay {
+    padding-top: 50px;
+  }
+
+  .pa-search-modal {
+    width: 92%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .pa-search-input-wrapper {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .pa-search-input-wrapper input {
+    font-size: 0.88rem;
+  }
+
+  .pa-search-action-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    gap: 8px;
+  }
+
+  .pa-search-suggestion-text {
+    font-size: 0.82rem;
+    max-width: 60%;
+    white-space: nowrap;
+  }
+
+  .pa-search-corner-btn {
+    height: 26px;
+    padding: 0 8px;
+    font-size: 0.72rem;
+    border-radius: 5px;
+  }
+}
+
+/* Fix Layout & Prevent full-width button stretching */
+.pa-search-action-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 8px !important;
+}
+
+/* Strict Inline Override for CTAButton */
+button.pa-search-corner-btn,
+a.pa-search-corner-btn {
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  width: auto !important;
+  max-width: fit-content !important;
+  padding: 0 10px !important;
+  font-size: 0.75rem !important;
+  border-radius: 6px !important;
+  flex: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile Screen Override */
+@media (max-width: 640px) {
+  button.pa-search-corner-btn,
+  a.pa-search-corner-btn {
+    height: 26px !important;
+    min-height: 26px !important;
+    padding: 0 8px !important;
+    font-size: 0.72rem !important;
+  }
+}

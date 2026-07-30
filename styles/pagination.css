@@ -1,0 +1,88 @@
+/* ==========================================
+   REUSABLE PAGINATION COMPONENT STYLES
+   ========================================== */
+
+.pa-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 10px 0;
+  user-select: none;
+}
+
+/* Base Page Number & Arrow Buttons */
+.pa-page-num,
+.pa-page-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover Effect */
+.pa-page-num:hover,
+.pa-page-arrow:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #e2e8f0;
+}
+
+/* Active Page Highlight (Purple Theme) */
+.pa-page-num.is-active {
+  background: #ede9fe;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+  font-weight: 700;
+}
+
+/* Disabled Arrow State */
+.pa-page-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Ellipsis Dots (...) */
+.pa-page-dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 38px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 📱 Responsive Adjustments */
+@media (max-width: 769px) {
+  .pa-pagination {
+    gap: 4px;
+    margin-top: 28px;
+  }
+
+  .pa-page-num,
+  .pa-page-arrow {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+
+  .pa-page-dots {
+    min-width: 20px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+}

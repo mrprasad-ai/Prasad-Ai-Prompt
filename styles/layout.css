@@ -1,0 +1,346 @@
+/* ==========================================================
+   CONTAINERS
+========================================================== */
+
+.pa-container {
+  width: min(100%, 1320px);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.pa-container-lg {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.pa-container-sm {
+  width: min(100%, 920px);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ==========================================================
+   SECTIONS
+========================================================== */
+
+.pa-section {
+  padding-block: 72px;
+}
+
+.pa-section-sm {
+  padding-block: 48px;
+}
+
+.pa-section-lg {
+  padding-block: 96px;
+}
+
+/* Section Header & Typography Helpers */
+.pa-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.pa-section-content {
+  max-width: 640px;
+}
+
+.pa-section-title {
+  margin-bottom: 10px;
+}
+
+.pa-section-description {
+  max-width: 560px;
+}
+
+.pa-section-divider {
+  margin-top: 56px;
+}
+
+/* ==========================================================
+   GRID SYSTEM
+========================================================== */
+
+.pa-grid {
+  display: grid;
+  gap: 24px;
+}
+
+/* Fixed Columns */
+.pa-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.pa-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.pa-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Auto-Fit Layouts */
+.pa-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.pa-grid-auto-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.pa-grid-auto-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+/* Uneven Layouts */
+.pa-grid-sidebar {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 32px;
+}
+
+.pa-grid-feature {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 32px;
+}
+
+/* Grid Alignments */
+.pa-grid-center {
+  align-items: center;
+}
+
+.pa-grid-start {
+  align-items: start;
+}
+
+.pa-grid-end {
+  align-items: end;
+}
+
+/* ==========================================================
+   FLEXBOX UTILITIES
+========================================================== */
+
+.pa-flex {
+  display: flex;
+}
+
+.pa-inline-flex {
+  display: inline-flex;
+}
+
+.pa-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.pa-flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* Flex Combination Shortcuts */
+.pa-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pa-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pa-flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.pa-flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Align Items */
+.pa-items-start {
+  align-items: flex-start;
+}
+
+.pa-items-center {
+  align-items: center;
+}
+
+.pa-items-end {
+  align-items: flex-end;
+}
+
+/* Justify Content */
+.pa-justify-start {
+  justify-content: flex-start;
+}
+
+.pa-justify-center {
+  justify-content: center;
+}
+
+.pa-justify-end {
+  justify-content: flex-end;
+}
+
+.pa-justify-between {
+  justify-content: space-between;
+}
+
+.pa-justify-around {
+  justify-content: space-around;
+}
+
+.pa-justify-evenly {
+  justify-content: space-evenly;
+}
+
+/* ==========================================================
+   GAP UTILITIES
+========================================================== */
+
+.pa-gap-4  { gap: 4px; }
+.pa-gap-8  { gap: 8px; }
+.pa-gap-12 { gap: 12px; }
+.pa-gap-16 { gap: 16px; }
+.pa-gap-20 { gap: 20px; }
+.pa-gap-24 { gap: 24px; }
+.pa-gap-32 { gap: 32px; }
+.pa-gap-40 { gap: 40px; }
+.pa-gap-48 { gap: 48px; }
+.pa-gap-56 { gap: 56px; }
+.pa-gap-64 { gap: 64px; }
+
+/* ==========================================================
+   DIVIDERS
+========================================================== */
+
+.pa-divider,
+.pa-divider-gradient {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #3b82f6 15%,
+    #8b5cf6 50%,
+    #3b82f6 85%,
+    transparent
+  );
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.45));
+}
+
+/* ==========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================== */
+
+@media (max-width: 1200px) {
+  .pa-container,
+  .pa-container-lg,
+  .pa-container-sm {
+    padding-inline: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .pa-grid-3,
+  .pa-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pa-grid-sidebar,
+  .pa-grid-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .pa-section {
+    padding-block: 64px;
+  }
+
+  .pa-section-lg {
+    padding-block: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pa-container,
+  .pa-container-lg,
+  .pa-container-sm {
+    padding-inline: 16px;
+  }
+
+  .pa-grid-2,
+  .pa-grid-3,
+  .pa-grid-4,
+  .pa-grid-auto,
+  .pa-grid-auto-sm,
+  .pa-grid-auto-lg,
+  .pa-grid-sidebar,
+  .pa-grid-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .pa-section {
+    padding-block: 48px;
+  }
+
+  .pa-section-lg {
+    padding-block: 64px;
+  }
+
+  .pa-section-sm {
+    padding-block: 32px;
+  }
+
+  .pa-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pa-container,
+  .pa-container-lg,
+  .pa-container-sm {
+    padding-inline: 14px;
+  }
+
+  .pa-grid,
+  .pa-grid-2,
+  .pa-grid-3,
+  .pa-grid-4 {
+    gap: 16px;
+  }
+
+  .pa-section {
+    padding-block: 40px;
+  }
+
+  .pa-section-lg {
+    padding-block: 56px;
+  }
+}

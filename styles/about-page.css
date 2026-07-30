@@ -1,0 +1,216 @@
+/* --- ABOUT PAGE STYLES --- */
+.pa-about-page {
+  padding: 40px 0 80px;
+}
+
+.about-hero {
+  margin-bottom: 32px;
+}
+
+/* --- GRID LAYOUT FOR CARDS --- */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 56px;
+}
+
+.about-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+}
+
+.about-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: #f1f5f9;
+  color: #0f172a;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.about-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- SOCIAL COMMUNITY SECTION --- */
+.about-community-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 36px 32px;
+  margin-bottom: 56px;
+  text-align: center;
+}
+
+.community-content h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.community-content p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* --- SOCIAL GRID & CARDS --- */
+.about-social-grid {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.social-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-item-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.social-card {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.social-card svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.social-item-wrapper span {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Brand Colors & Glow Shadows */
+.social-card.instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  box-shadow: 0 12px 24px -6px rgba(220, 39, 67, 0.45);
+}
+
+.social-card.telegram {
+  background: #229ed9;
+  box-shadow: 0 12px 24px -6px rgba(34, 158, 217, 0.45);
+}
+
+.social-card.whatsapp {
+  background: #25d366;
+  box-shadow: 0 12px 24px -6px rgba(37, 211, 102, 0.45);
+}
+
+.social-card.youtube {
+  background: #ff0000;
+  box-shadow: 0 12px 24px -6px rgba(255, 0, 0, 0.45);
+}
+
+/* Hover Adjustments */
+.social-card.instagram:hover { filter: brightness(1.08); }
+.social-card.telegram:hover { background: #1d8ec3; }
+.social-card.whatsapp:hover { background: #20bd5a; }
+.social-card.youtube:hover { background: #e60000; }
+
+/* --- BOTTOM CTA CARD --- */
+.about-cta-card {
+  text-align: center;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 48px 24px;
+}
+
+.about-cta-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.about-cta-card p {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+/* --- SIMPLE COPYRIGHT FOOTER --- */
+.about-simple-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.about-simple-footer p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .social-card {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+  }
+
+  .social-card svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .social-item-wrapper span {
+    font-size: 0.85rem;
+  }
+
+  .about-cta-card h2 {
+    font-size: 1.4rem;
+  }
+}

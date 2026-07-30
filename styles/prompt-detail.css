@@ -1,0 +1,883 @@
+.pa-prompt-detail-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+/* Outer main wrapper aur parent tags ka white background hatane ke liye */
+main,
+.page-container,
+.main-wrapper {
+  background-color: transparent !important;
+}
+
+/* Detail page par lists (bullets aur numbers) ko wapas laane ke liye */
+
+
+/* --------------------------------------
+   1. Top Bar & Breadcrumbs
+-------------------------------------- */
+.prompt-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+  gap: 16px;
+  width: 100%;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 1;
+}
+
+.breadcrumbs a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.breadcrumbs a:hover {
+  color: #0f172a;
+}
+
+.breadcrumbs .sep {
+  color: #cbd5e1;
+}
+
+.breadcrumbs .active-crumb {
+  color: #2563eb;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #334155;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* --------------------------------------
+   2. Header Section & Meta
+-------------------------------------- */
+.prompt-header-section {
+  margin-bottom: 24px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.prompt-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.meta-row {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  background: transparent !important;
+  padding: 0;
+}
+
+.category-pill:hover {
+  opacity: 0.7;
+}
+
+.category-pill.color-blue { color: #0284c7; }
+.category-pill.color-purple { color: #7c3aed; }
+.category-pill.color-green { color: #16a34a; }
+.category-pill.color-red { color: #dc2626; }
+.category-pill.color-yellow { color: #ca8a04; }
+.category-pill.color-orange { color: #ea580c; }
+.category-pill.color-pink { color: #db2777; }
+.category-pill.color-brown { color: #8e501a; }
+.category-pill.color-default { color: #475569; }
+
+.title-share-btn {
+  background: #f8fafc00;
+  border:none;
+  color: #334155;
+  width: 52px;
+  height: 62px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.title-share-btn svg {
+    width: 32px;
+    height: 32px;
+  }
+
+.title-share-btn:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.15);
+}
+
+/* --------------------------------------
+   3. Image Container
+-------------------------------------- */
+.prompt-image-container {
+  max-width: 720px; 
+  margin: 0 auto 28px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.prompt-preview-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------
+   4. Custom Notion Page Content
+-------------------------------------- */
+.prompt-custom-content {
+  margin-bottom: 24px;
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.prompt-custom-content p {
+  margin-bottom: 12px;
+}
+
+.prompt-custom-content h1, 
+.prompt-custom-content h2, 
+.prompt-custom-content h3 {
+  color: #0042dd;
+  margin: 24px 0 12px 0;
+  font-weight: 500;
+}
+
+/* Notion Custom Content Lists - Modern Disk Design */
+.prompt-custom-content ul {
+  list-style: none; /* Default ugly dots ko hatane ke liye */
+  padding-left: 24px;
+  margin: 14px 0 18px 0;
+}
+
+.prompt-custom-content ul li {
+  position: relative;
+  padding-left: 28px; /* Custom disk ke liye space */
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.5;
+  color: #334155;
+}
+
+/* Custom Stylish Disk/Dot Design */
+.prompt-custom-content ul li::before {
+  content: "" !important;
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b25eb);
+}
+
+/* Agar Numbered/Ordered List hai toh uske numbers ko bhi modern style dene ke liye */
+.prompt-custom-content ol {
+  list-style: none;
+  counter-reset: custom-counter;
+  padding-left: 0;
+  margin: 14px 0 18px 0;
+}
+
+.prompt-custom-content ol li {
+  position: relative;
+  counter-increment: custom-counter;
+  padding-left: 36px; 
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.5;
+  color: #334155;
+}
+
+/* Round Border & Transparent Background Number Badge */
+.prompt-custom-content ol li::before {
+  content: counter(custom-counter) !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  background: transparent ; 
+  border: 1.5px solid #0787ff; 
+  color:  #0787ff; ; 
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------
+   5. Prompt Card Box
+-------------------------------------- */
+.prompt-card-box {
+  position: relative;
+  /* background: linear-gradient(135deg, rgba(3, 176, 250, 0.08) 0%, rgba(205, 5, 250, 0.08) 100%) !important;*/
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 10px rgba(15, 23, 42, 0.112);
+  z-index: 1;
+}
+
+/* Gradient Border ke liye yeh alag se add karein */
+.prompt-card-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1.5px; /* Border ki motai (thickness) */
+  background: linear-gradient(135deg, #166fff, #bb00ff);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.prompt-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb; 
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap; 
+  flex-shrink: 0; 
+}
+
+.prompt-text {
+  color: #334155;
+  font-size: 0.995rem;
+  line-height: 1.4;
+  white-space: pre-line;
+  margin: 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.prompt-text p {
+  margin: 0 0 8px 0;
+}
+
+.prompt-text p:last-child {
+  margin-bottom: 0;
+}
+
+.prompt-text br {
+  display: block;
+  content: "";
+  margin-top: 0px; 
+}
+
+/* --- COPY BUTTON --- */
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: #eff6ff; 
+  color: #2563eb; 
+  border: 1px solid #bfdbfe;
+  transition: all 0.3s ease;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  background: linear-gradient(135deg, #3b82f6, #8b25eb); 
+  color: white;
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.copy-btn.copied {
+  background: linear-gradient(135deg, #3b82f6, #8b25eb);
+  color: white;
+  border-color: transparent;
+}
+
+/* --------------------------------------
+   6. Action Buttons
+-------------------------------------- */
+.prompt-actions-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+.prompt-actions-grid > * {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.action-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.action-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  color: white;
+  opacity: 0.95;
+}
+
+.ext-icon {
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* --- "How to use this Prompt?" Button Custom Styling --- */
+.action-btn.how-to-use-trigger {
+  background: #1e293b !important;
+  color: #ffffff !important;
+  border: 1px solid #334155 !important;
+}
+
+.action-btn.how-to-use-trigger:hover {
+  background: #0f172a !important;
+  border-color: #475569 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* --------------------------------------
+   7. Note Box
+-------------------------------------- */
+.prompt-note-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #b20fd3;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-top: 24px;
+  box-shadow: 0 6px 10px rgba(15, 23, 42, 0.058);
+}
+
+.prompt-note-box h4 {
+  margin: 0 0 6px 0;
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.prompt-note-box p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================
+   HOW TO USE MODAL STYLING
+========================================================== */
+
+/* --- PERFECT CENTER MODAL OVERLAY --- */
+.pa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;  
+  justify-content: center !important; 
+  z-index: 999999;
+  padding: 80px 16px 16px 16px !important; 
+  box-sizing: border-box;
+}
+
+.pa-modal-content.pa-htu-modal {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  max-height: calc(85vh - 20px) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: auto;
+}
+
+/* Compact Pro Tip Box inside Popup */
+.pa-popup-pro-tip {
+  background: #f9f3e3;
+  border: 1px solid #eab308;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+
+.pa-popup-pro-tip .tip-icon {
+  color: #eab308;
+}
+
+/* Modal Header & Close Button */
+.pa-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 16px 20px 0;
+}
+
+.pa-modal-close {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pa-modal-close:hover {
+  background: #e2e8f0;
+}
+
+/* Modal Body / Scrollable Content */
+.pa-modal-body {
+  padding: 10px 24px 24px;
+  overflow-y: auto;
+}
+
+.pa-modal-body .htu-content-wrapper {
+  padding: 0;
+}
+
+.pa-modal-body .htu-header-section {
+  padding-top: 0;
+  margin-bottom: 20px;
+}
+
+.pa-modal-body .htu-main-title {
+  font-size: 1.2rem;
+  margin-top: 12px;
+}
+
+.pa-modal-body .htu-subtitle {
+  font-size: 0.85rem;
+}
+
+.pa-modal-body .htu-step-card {
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.pa-modal-body .htu-step-card h2 {
+  font-size: 0.95rem;
+}
+
+.pa-modal-body .htu-step-card p, 
+.pa-modal-body .htu-sub-list li {
+  font-size: 0.82rem;
+}
+
+.pa-modal-body .htu-pro-tips-card {
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.pa-htu-modal .htu-step-badge {
+  display: none;
+}
+
+.pa-htu-modal .htu-steps-container {
+  gap: 0px; 
+}
+
+.pa-htu-modal .htu-step-card {
+  padding: 10px 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --------------------------------------
+   Similar Prompts Section
+-------------------------------------- */
+.similar-prompts-section {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.similar-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Desktop: Single Row (4-5 items) */
+.similar-prompts-slider {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.similar-prompt-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.similar-prompt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.similar-img-box {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Portrait ratio */
+  border-radius: 5px;
+  overflow: hidden;
+  background: #0f172a;
+  margin-bottom: 10px;
+}
+
+.similar-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.similar-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 12px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.4em;
+}
+
+.similar-section-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  background: #133ce1; 
+  border-radius: 4px;
+}
+
+.similar-try-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 100%;
+    
+    /* Yahan min-height ko override karke chota kiya gaya hai */
+    min-height: unset;
+    height: 30px;
+    
+    padding: 0 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.78rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* --------------------------------------
+   8. Mobile Responsiveness
+-------------------------------------- */
+@media (max-width: 768px) {
+  .pa-prompt-detail-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+  .prompt-title {
+    font-size: 1.75rem;
+  }
+
+  .prompt-top-bar {
+    flex-direction: row; 
+    align-items: center;
+    gap: 12px;
+  }
+
+  .breadcrumbs {
+    font-size: 0.8rem;
+  }
+  
+  .back-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+  
+  .back-icon {
+    width: 30px;
+    height: 14px;
+  }
+  
+  .back-text { 
+    display: none; 
+  }
+
+  .title-share-btn {
+    width: 36px;
+    height: 46px;
+  }
+  .title-share-btn svg {
+    width: 26px;
+    height: 26px;
+  }
+  .title-share-btn:hover {
+    transform: none;
+    box-shadow:none;
+    background: none;
+  }
+
+  .prompt-actions-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .prompt-actions-grid > *:nth-child(1),
+  .prompt-actions-grid > *:nth-child(2) {
+    flex: 1 1 calc(50% - 5px) !important;
+    max-width: calc(50% - 5px) !important;
+    min-width: 140px !important;
+  }
+
+  .prompt-actions-grid > *:nth-child(3) {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .action-btn {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 0.8rem; 
+    gap: 6px;
+    transition: none !important;
+  }
+ 
+  .action-btn:hover {
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+    opacity: 1 !important;
+  }
+
+  .action-btn.how-to-use-trigger {
+    background: #1e293b !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+  }
+  
+  .action-btn.how-to-use-trigger:hover {
+    background: #1e293b !important;
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .ext-icon { display: none;}
+ 
+  .prompt-card-content {
+    max-height: 220px; 
+    overflow-y: auto; 
+    padding-right: 4px; 
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }
+
+  .prompt-card-content::-webkit-scrollbar {display: none;}
+
+  .copy-btn {
+    padding: 4px 10px;
+    font-size: 0.80rem; 
+    border-radius: 8px;
+    gap: 4px;
+    height: 35px;
+    min-height: 0; 
+  }
+
+  .copy-btn:hover {
+    background: #eff6ff;
+    color: #2563eb;
+    border-color: #bfdbfe;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .copy-btn.copied {
+  background: linear-gradient(135deg, #3b82f6, #8b25eb);
+  color: white;
+  border-color: transparent;
+  }
+
+  .copy-btn svg { width: 14px; height: 14px;}
+
+  .pa-modal-content.pa-htu-modal {
+    max-height: 90vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-top: auto;
+  }
+
+  /* ---Similar Prompt Mobile View: Horizontal Slide --- */
+  .similar-prompts-slider {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow-x: visible;
+    scroll-snap-type:none;
+    padding-bottom: 0;
+  }
+
+  .similar-prompts-slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .similar-prompt-card {
+    width: 100%;
+    flex: unset;
+    scroll-snap-align: none;
+  }
+  .similar-prompt-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+  .similar-title {
+    font-size: 0.8rem;
+  }
+
+  .similar-try-btn {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}

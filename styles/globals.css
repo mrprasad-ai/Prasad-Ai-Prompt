@@ -1,0 +1,297 @@
+/* ==========================================================
+   GLOBAL RESET
+========================================================== */
+
+*,
+*::before,
+*::after{
+
+  box-sizing:border-box;
+
+  margin:0;
+
+  padding:0;
+}
+
+*{
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+
+  width:100%;
+
+  min-height:100%;
+
+  scroll-behavior:smooth;
+
+  text-size-adjust:100%;
+
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+
+  min-width:320px;
+
+  min-height:100vh;
+
+  background:var(--pa-background);
+
+  color:var(--pa-text);
+
+  overflow-x:hidden;
+
+  text-rendering:optimizeLegibility;
+
+  -webkit-font-smoothing:antialiased;
+
+  -moz-osx-font-smoothing:grayscale;
+}
+
+:where(button,input,textarea,select){
+
+  font:inherit;
+}
+
+:where(button){
+
+  cursor:pointer;
+}
+
+/* ==========================================================
+   MEDIA
+========================================================== */
+
+img,
+picture,
+video,
+canvas,
+svg{
+
+  display:block;
+
+  max-width:100%;
+}
+
+img{
+
+  height:auto;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+}
+
+video{
+
+  width:100%;
+
+  height:auto;
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+input,
+button,
+textarea,
+select{
+
+  font:inherit;
+
+  color:inherit;
+}
+
+button{
+
+  background:none;
+
+  border:0;
+
+  outline:0;
+
+  cursor:pointer;
+}
+
+input,
+textarea,
+select{
+
+  background:transparent;
+
+  border:none;
+
+  outline:none;
+}
+
+textarea{
+
+  resize:vertical;
+
+  min-height:120px;
+}
+
+input::placeholder,
+textarea::placeholder{
+
+  color:var(--pa-text-light);
+
+  opacity:.8;
+}
+
+/* ==========================================================
+   LIST
+========================================================== */
+
+ul,
+ol{
+
+  list-style:none;
+}
+
+dl{
+
+  margin:0;
+}
+
+/* ==========================================================
+   TABLE
+========================================================== */
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  border-spacing:0;
+}
+
+th,
+td{
+
+  text-align:left;
+
+  vertical-align:top;
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+html{
+
+  scrollbar-width:thin;
+
+  scrollbar-color:
+    var(--pa-gray-400)
+    var(--pa-gray-100);
+}
+
+::-webkit-scrollbar{
+
+  width:10px;
+
+  height:10px;
+}
+
+::-webkit-scrollbar-track{
+
+  background:var(--pa-gray-100);
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:var(--pa-gray-400);
+
+  border-radius:999px;
+
+  border:2px solid var(--pa-gray-100);
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:var(--pa-primary);
+}
+
+/* ==========================================================
+   FOCUS
+========================================================== */
+
+:focus-visible{
+
+  outline:2px solid var(--pa-primary);
+
+  outline-offset:3px;
+
+  border-radius:6px;
+}
+
+:focus:not(:focus-visible){
+
+  outline:none;
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+section{
+
+  position:relative;
+}
+
+main{
+
+  isolation:isolate;
+}
+
+/* ==========================================================
+   SMOOTH TRANSITIONS
+========================================================== */
+
+a,
+button,
+input,
+textarea,
+select,
+img,
+svg{
+
+  transition:
+    color var(--pa-transition),
+    background-color var(--pa-transition),
+    border-color var(--pa-transition),
+    opacity var(--pa-transition),
+    transform var(--pa-transition),
+    box-shadow var(--pa-transition);
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+  html{
+
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration:.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    transition-duration:.01ms !important;
+
+    scroll-behavior:auto !important;
+  }
+
+}

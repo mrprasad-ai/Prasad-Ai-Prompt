@@ -1,0 +1,165 @@
+/* ==========================================================
+   PRIMARY BUTTON BASE & GLOW EFFECT
+========================================================== */
+
+.pa-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 48px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px; 
+  background: var(--pa-gradient-primary); 
+  color: var(--pa-white);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.35);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+    
+}
+
+.pa-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -4px rgba(11, 132, 253, 0.353);
+}
+
+.pa-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.pa-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18), 0 8px 20px -4px rgba(239, 68, 68, 0.35);
+}
+
+.pa-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Full Width Utility */
+.pa-button-full {
+  width: 100%;
+}
+
+/* ==========================================================
+   BUTTON VARIANTS (Outline & Ghost)
+========================================================== */
+
+.pa-button-outline {
+  background: transparent;
+  color: var(--pa-primary);
+  border: 1px solid var(--pa-border);
+  box-shadow: none;
+}
+
+.pa-button-outline:hover {
+  background: rgba(124, 58, 237, 0.06);
+  border-color: rgba(124, 58, 237, 0.28);
+  color: var(--pa-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.1);
+}
+
+.pa-button-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--pa-primary);
+  box-shadow: none;
+}
+
+.pa-button-ghost:hover {
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--pa-primary);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   BUTTON SIZES
+========================================================== */
+
+.pa-button-sm {
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-size: 0.84rem;
+}
+
+.pa-button-lg {
+  min-height: 56px;
+  padding: 0 30px;
+  border-radius: 16px;
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   ICON UTILITIES
+========================================================== */
+
+.pa-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pa-button-icon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.pa-button:hover .pa-button-icon svg {
+  transform: translateX(3px);
+}
+
+/* ==========================================================
+   LINK STYLING OVERRIDES (`<a>` tags)
+========================================================== */
+
+a.pa-button,
+a.pa-button:link,
+a.pa-button:visited,
+a.pa-button:hover,
+a.pa-button:focus-visible {
+  color: var(--pa-white);
+  text-decoration: none;
+}
+
+/* ==========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================== */
+
+@media (max-width: 768px) {
+  .pa-button {
+    min-height: 46px;
+  }
+
+  .pa-button:hover {
+    transform: none
+  }
+}
+
+@media (max-width: 480px) {
+  .pa-button {
+    min-height: 44px;
+    padding: 0 18px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,159 @@
+/* ==========================================================
+   PRASAD AI BRAND SYSTEM
+   ========================================================== */
+
+/* Brand Gradient */
+
+.pa-gradient-primary {
+  background: var(--pa-gradient-primary);
+}
+
+.pa-gradient-text {
+  background: var(--pa-gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ----------------------------------------------------------
+   Logo
+---------------------------------------------------------- */
+
+.pa-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pa-space-16);
+}
+
+.pa-logo-image {
+  display: block;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.pa-logo-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--pa-text);
+}
+
+.pa-logo-subtitle {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  color: var(--pa-text-light);
+}
+
+/* ----------------------------------------------------------
+   Section Title Accent
+---------------------------------------------------------- */
+
+.pa-title-accent {
+  display: inline-block;
+  width: 64px;
+  height: 4px;
+  margin-top: 12px;
+  border-radius: var(--pa-radius-full);
+  background: var(--pa-gradient-primary);
+}
+
+/* ----------------------------------------------------------
+   Divider
+---------------------------------------------------------- */
+
+.pa-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--pa-border);
+}
+
+.pa-divider-gradient {
+  width: 100%;
+  height: 1px;
+  background: var(--pa-gradient-primary);
+  opacity: 0.2;
+}
+
+/* ----------------------------------------------------------
+   Logo Content
+---------------------------------------------------------- */
+
+.pa-logo-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pa-logo-image {
+  flex-shrink: 0;
+}
+
+.pa-logo-title {
+  margin: 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+
+  letter-spacing: -0.03em;
+}
+
+.pa-logo-subtitle {
+  margin-top: 6px;
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  color: var(--pa-text-light);
+}
+
+@media (max-width: 768px) {
+  .pa-logo-image {
+    width: 46px;
+    height: 46px;
+  }
+
+  .pa-logo-title {
+    font-size: 1.5rem;
+  }
+
+  .pa-logo-subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+/* ==========================================================
+   Logo (Next/Image)
+========================================================== */
+
+.pa-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+
+  text-decoration: none;
+
+  flex-shrink: 0;
+}
+
+.pa-logo-image {
+  width: 52px !important;
+  height: 52px !important;
+
+  flex-shrink: 0;
+}
+
+.pa-logo-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pa-logo-title {
+  margin: 0;
+}
+
+.pa-logo-subtitle {
+  margin: 4px 0 0;
+}

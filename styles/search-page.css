@@ -1,0 +1,108 @@
+/* ==========================================================
+   SEARCH RESULTS PAGE
+========================================================== */
+
+.pa-search-page {
+  padding: 36px 0 80px;
+  min-height: 75vh;
+ 
+}
+
+.pa-search-page-header {
+  margin-bottom: 32px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-decoration: none;
+  margin-bottom: 14px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #2563eb;
+}
+
+.search-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-page-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.search-query-badge {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2563eb;
+  background: #eef2ff;
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+}
+
+.search-results-count {
+  font-size: 0.92rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* Loading State */
+.search-loading-state {
+  text-align: center;
+  padding: 80px 0;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Empty Search State */
+.pa-search-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px dashed #e5e7eb;
+  max-width: 480px;
+  margin: 20px auto 0;
+}
+
+.empty-icon {
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.pa-search-empty h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.pa-search-empty p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.empty-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}

@@ -1,0 +1,100 @@
+:root {
+  /* ==========================================
+     Colors
+  ========================================== */
+
+  --pa-white: #ffffff;
+  --pa-black: #111827;
+
+  --pa-gray-50: #f9fafb;
+  --pa-gray-100: #f3f4f6;
+  --pa-gray-200: #e5e7eb;
+  --pa-gray-300: #d1d5db;
+  --pa-gray-400: #9ca3af;
+  --pa-gray-500: #6b7280;
+  --pa-gray-600: #4b5563;
+  --pa-gray-700: #374151;
+  --pa-gray-800: #1f2937;
+  --pa-gray-900: #111827;
+
+  --pa-primary: #2563eb;
+  --pa-primary-dark: #1d4ed8;
+
+  --pa-secondary: #7c3aed;
+  --pa-secondary-dark: #6d28d9;
+
+  --pa-success: #16a34a;
+  --pa-warning: #f59e0b;
+  --pa-danger: #dc2626;
+
+  --pa-text: var(--pa-gray-900);
+  --pa-text-light: var(--pa-gray-500);
+
+  --pa-background: var(--pa-white);
+  --pa-surface: var(--pa-white);
+  --pa-border: var(--pa-gray-200);
+
+  /* ==========================================
+     Gradients
+  ========================================== */
+
+  --pa-gradient-primary: linear-gradient(
+    135deg,
+    #38bdf8 0%,
+    #2563eb 50%,
+    #7c3aed 100%
+  );
+
+  /* ==========================================
+     Radius
+  ========================================== */
+
+  --pa-radius-xs: 8px;
+  --pa-radius-sm: 12px;
+  --pa-radius-md: 16px;
+  --pa-radius-lg: 20px;
+  --pa-radius-xl: 24px;
+  --pa-radius-full: 999px;
+
+  /* ==========================================
+     Container
+  ========================================== */
+
+  --pa-container: 1280px;
+
+  /* ==========================================
+     Spacing
+  ========================================== */
+
+  --pa-space-8: 8px;
+  --pa-space-16: 16px;
+  --pa-space-24: 24px;
+  --pa-space-32: 32px;
+  --pa-space-40: 40px;
+  --pa-space-48: 48px;
+  --pa-space-64: 64px;
+
+  /* ==========================================
+     Shadow
+  ========================================== */
+
+  --pa-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  --pa-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  --pa-shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.12);
+
+  /* ==========================================
+     Transition
+  ========================================== */
+
+  --pa-transition: 250ms ease;
+
+  /* ==========================================
+     Z Index
+  ========================================== */
+
+  --pa-z-header: 100;
+  --pa-z-overlay: 500;
+  --pa-z-modal: 1000;
+}
