@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Prasad AI",
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://prasad-ai-prompt.vercel.app/"),
   openGraph: {
     title: "Prasad AI Prompt",
     description:

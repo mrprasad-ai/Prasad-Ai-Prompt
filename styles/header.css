@@ -24,7 +24,7 @@
   position: sticky;
   top: 0;
   margin-top: 0;
-  z-index: l000;
+  z-index: 1000;
 }
 /* Header Bottom Gradient Accent Line */
 .pa-header::after {
@@ -65,8 +65,8 @@
 }
 
 .pa-logo-image {
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -74,14 +74,14 @@
 .pa-logo-content {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
+  line-height: 1;
   align-items: flex-start;
 }
 
 .pa-logo-text {
-  font-size: 1.6rem;
+  font-size: 2.1rem; /* Brand name ko bada kar diya gaya hai */
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: #111827;
 }
 
@@ -92,13 +92,13 @@
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
-
 .pa-logo-subtitle {
   margin-top: 2px;
-  font-size: 0.72rem;
+  font-size: 0.50rem; 
   color: #6b7280;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
+  font-weight: 400;
 }
 
 /* ==========================================================
@@ -587,9 +587,18 @@
   }
 
   .pa-logo-text {
-    font-size: 1.45rem;
+    font-size: 1.65rem; /* Mobile par brand name ko thoda chhota aur clean kar diya */
   }
 
+  .pa-logo-subtitle {
+    font-size: 0.4rem; 
+  }
+
+  .pa-logo-image {
+    width: 54px; 
+    height: 54px;;
+  }
+  
   .pa-mobile-menu {
     width: 290px;
     padding: 20px;

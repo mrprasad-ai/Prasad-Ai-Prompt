@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState, useEffect } from "react"; // 💡 FIX: useEffect import add kiya
+import { useState, useEffect } from "react";
 import { LayoutGrid, Filter } from "lucide-react";
 import { Prompt, Category } from "@/types/prompt";
 import PromptCard from "@/components/ui/prompt-card";
@@ -13,46 +14,45 @@ type BrowseClientProps = {
   initialCategorySlug?: string;
 };
 
-// 💡 FIX: Text ko slug format mein convert karne ka helper
-const makeSlug = (text: string) => {
-  if (!text || text === "all") return "all";
-  return text
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/'/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-};
-
 export default function BrowseClient({
   initialPrompts,
   categories = [],
   initialCategorySlug = "all",
 }: BrowseClientProps) {
-  // 💡 FIX: URL param ko turant slug banakar state mein set karein
-  const [selectedSlug, setSelectedSlug] = useState<string>(makeSlug(initialCategorySlug));
+  // 1. Slug ya Name ke bajaye ab hum Direct Category ID (slug/id match karke) state maintain karenge
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("latest");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 9;
 
-  // 💡 FIX: Jab URL/Link change ho toh dropdown automatically update ho jaye
+  // 2. Initial load ya URL change hone par category ko match karke uska ID set karna
   useEffect(() => {
-    setSelectedSlug(makeSlug(initialCategorySlug));
-    setCurrentPage(1); // Category change par page 1 par bhej dein
-  }, [initialCategorySlug]);
+    if (!initialCategorySlug || initialCategorySlug === "all") {
+      setSelectedCategoryId("all");
+    } else {
+      // URL ke slug se category dhoondho
+      const matchedCat = categories.find((c) => c.slug === initialCategorySlug);
+      setSelectedCategoryId(matchedCat ? matchedCat.id : "all");
+    }
+    setCurrentPage(1);
+  }, [initialCategorySlug, categories]);
 
-  // 1. Filtering Logic
+  // 3. Filtering Logic (Ab yeh Category ID ke base par chalega, name change hone par bhi nahi tutegea)
   const filteredPrompts = initialPrompts.filter((prompt) => {
-    if (selectedSlug === "all") return true;
+    if (selectedCategoryId === "all") return true;
 
-    return prompt.category.some((cat) => {
-      const catSlug = makeSlug(cat.name);
-      return catSlug === selectedSlug;
+    // Prompt ke androni relation/category structure se match karwana
+    return prompt.category.some((cat: any) => {
+      // Agar category object mein ID available hai toh usse match karo
+      if (cat.id) return cat.id === selectedCategoryId;
+      
+      // Fallback: Agar naam se match karna pade toh safe comparison
+      const targetCat = categories.find((c) => c.id === selectedCategoryId);
+      return targetCat && cat.name.trim().toLowerCase() === targetCat.name.trim().toLowerCase();
     });
   });
 
-  // 2. Sorting Logic
+  // 4. Sorting Logic
   const sortedPrompts = [...filteredPrompts].sort((a, b) => {
     if (sortBy === "latest") {
       return (
@@ -69,7 +69,7 @@ export default function BrowseClient({
     return 0;
   });
 
-  // 3. Pagination Logic
+  // 5. Pagination Logic
   const totalPages = Math.ceil(sortedPrompts.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentPrompts = sortedPrompts.slice(startIndex, startIndex + itemsPerPage);
@@ -87,16 +87,16 @@ export default function BrowseClient({
         <div className="pa-dropdown-wrapper">
           <LayoutGrid size={18} className="pa-dropdown-icon" />
           <select
-            value={selectedSlug}
+            value={selectedCategoryId}
             onChange={(e) => {
-              setSelectedSlug(e.target.value);
+              setSelectedCategoryId(e.target.value);
               setCurrentPage(1);
             }}
             className="pa-filter-select"
           >
             <option value="all">All Categories</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.slug}>
+              <option key={cat.id} value={cat.id}>
                 {cat.name} ({cat.promptCount})
               </option>
             ))}

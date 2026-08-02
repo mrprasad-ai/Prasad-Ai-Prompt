@@ -1,4 +1,4 @@
-export const NOTION_REVALIDATE = 3600;
+export const NOTION_REVALIDATE = 60;
 
 export const NOTION_CACHE_TAGS = {
   prompts: "prompts",

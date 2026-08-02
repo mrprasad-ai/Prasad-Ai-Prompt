@@ -1,25 +1,32 @@
-export interface Prompt {
-  id: string;
-  title: string;
-  slug: string;
-  shortDescription: string;
-  category: {name: string;color: string;}[];
-  categoryColor: string;
-  thumbnail: string;
-  publishDate: string;
-  trending: boolean;
- 
-}
-
-export interface Category {
+export type Category = {
   id: string;
   name: string;
   slug: string;
-  icon?: string;
   color: string;
   notionColor?: string;
+  icon?: string;
   promptCount?: number;
-}
+};
+
+export type Prompt = {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  shortDescription?: string;
+  thumbnail: string;
+  views?: number;
+  trending?: boolean;
+  publishDate?: string;
+  category: {
+    name: string;
+    slug?: string;
+    color: string;
+    notionColor?: string;
+    icon?: string;
+  }[];
+
+};
 
 export interface PromptGridProps {
   prompts: Prompt[];

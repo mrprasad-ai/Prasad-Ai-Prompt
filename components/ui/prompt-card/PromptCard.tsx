@@ -3,10 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./prompt-card.css";
-import {
-  getCategoryBackground,
-  getCategoryIconColor,
-} from "@/lib/notion-categories";
+import { getCategoryIconColor } from "@/lib/notion-categories";
+import { Eye } from "lucide-react";
 
 export type PromptCardProps = {
   href?: string;
@@ -15,12 +13,26 @@ export type PromptCardProps = {
   description?: string;
   shortDescription?: string;
   thumbnail: string;
+  views?: number;
   category?: {
     name: string;
     color: string;
+    notionColor?: string;
   }[];
   categoryColor?: string;
 };
+
+// 💡 Views ko short format mein convert karne ka helper (jaise 1500 -> 1.5k)
+function formatViews(count?: number) {
+  if (!count || count === 0) return "0";
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+  }
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+  }
+  return count.toString();
+}
 
 function slugifyCategory(name: string) {
   return name
@@ -38,22 +50,21 @@ export default function PromptCard({
   description,
   shortDescription,
   thumbnail,
+  views = 0, // Default 0
   category = [],
 }: PromptCardProps) {
-  // Safe href fallback setup
   const cardHref = href || (slug ? `/prompt/${slug}` : "#");
   const cardDescription = description || shortDescription || "No description available.";
 
   return (
     <article className="prompt-card" style={{ position: "relative" }}>
-      {/* 1. Main Card Invisible Stretch Link */}
       <Link
         href={cardHref}
         className="prompt-card-main-link"
         aria-label={`Open ${title}`}
       />
 
-      <div className="prompt-card-thumbnail">
+      <div className="prompt-card-thumbnail" style={{ position: "relative" }}>
         <Image
           src={thumbnail || "/placeholder.jpg"}
           alt={title || "Prompt Image"}
@@ -64,6 +75,12 @@ export default function PromptCard({
           loading="lazy"
           unoptimized
         />
+
+        {/* 👁️ Thumbnail ke left-bottom corner par Views Badge */}
+        <div className="prompt-views-badge">
+          <Eye size={12} strokeWidth={2.2} />
+          <span>{formatViews(views)}</span>
+        </div>
       </div>
 
       <div className="prompt-card-content">
@@ -73,15 +90,15 @@ export default function PromptCard({
 
         {category.length > 0 && (
           <div className="prompt-card-categories">
-            {category.map((item) => (
+            {category.map((item: any) => (
               <Link
                 key={item.name}
                 href={`/category?category=${slugifyCategory(item.name)}`}
                 className="prompt-card-category"
                 prefetch={false}
                 style={{
-                  backgroundColor: getCategoryBackground(item.color),
-                  color: getCategoryIconColor(item.color),
+                  backgroundColor: item.color, 
+                  color: getCategoryIconColor(item.notionColor || "default"), 
                 }}
               >
                 {item.name}

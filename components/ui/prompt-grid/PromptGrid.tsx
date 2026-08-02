@@ -27,7 +27,6 @@ export default function PromptGrid({
           description={prompt.shortDescription}
           thumbnail={prompt.thumbnail}
           category={prompt.category}
-          categoryColor={prompt.categoryColor}
         />
       ))}
     </div>

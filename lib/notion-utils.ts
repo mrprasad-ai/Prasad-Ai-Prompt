@@ -1,5 +1,5 @@
 import { richTextToPlainText } from "./notion-rich-text";
-import { getNotionImageUrl } from "./notion-images";
+
 
 export function getTitle(properties: any): string {
   return richTextToPlainText(
@@ -35,9 +35,7 @@ export function getCategoryColor(properties: any): string {
 }
 
 export function getThumbnail(properties: any): string {
-  return getNotionImageUrl(
-    properties.Thumbnail?.files
-  );
+  return properties["Thumbnail URL"]?.url ?? "";
 }
 
 export function getPublishDate(properties: any): string {
@@ -46,4 +44,8 @@ export function getPublishDate(properties: any): string {
 
 export function isTrending(properties: any): boolean {
   return properties.Trending?.checkbox ?? false;
+}
+
+export function getViews(properties: any): number {
+  return properties.ViewsCount?.number ?? 0;
 }

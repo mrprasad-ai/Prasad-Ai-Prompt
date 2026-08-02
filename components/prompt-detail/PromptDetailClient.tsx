@@ -2,33 +2,25 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Baby, Cake, CircleUserRound, Images, Trees, Shapes, LayoutDashboard,
+import { LayoutDashboard,
   ArrowLeft, Copy, Check, FileText, HelpCircle, X, Lightbulb,
  } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { VscOpenai } from "react-icons/vsc";
 import { RiGeminiFill } from "react-icons/ri";
+import { getCategoryIconColor } from "@/lib/notion-categories";
 
 import HowToUseContent from "@/components/HowToUseContent";
 import CTAButton from "@/components/ui/CTAButton"; 
 import "@/styles/prompt-detail.css";
 
-const CATEGORY_ICONS: Record<string, any> = {
-  "babys-photography": Baby,
-  "birthday-and-greetings": Cake,
-  "birthday & greetings": Cake, 
-  "double-exposure": Images,
-  "dp-prompt": CircleUserRound,
-  "nature-and-travels": Trees,
-  "nature & travels": Trees,
-  others: Shapes,
-};
-
-function getCategoryIcon(slug: string, name: string) {
-  const cleanSlug = slug?.toLowerCase().trim();
-  const cleanName = name?.toLowerCase().trim();
-
-  return CATEGORY_ICONS[cleanSlug] || CATEGORY_ICONS[cleanName] || LayoutDashboard ;
+// 💡 Dynamic Icon Helper (Jo Notion se aane wale icon name ko lucide-react se match karega)
+function getDynamicIcon(iconName?: string) {
+  if (!iconName) return LayoutDashboard;
+  const formattedName = iconName.trim().replace(/[^a-zA-Z0-9]/g, "");
+  const FoundIcon = (LucideIcons as Record<string, any>)[formattedName];
+  return FoundIcon || LayoutDashboard;
 }
 
 type PromptDetailProps = {
@@ -42,7 +34,7 @@ type PromptDetailProps = {
     promptTexts: { plain: string; html: string }[]; 
     customContentHtml?: string;
     noteText?: string;
-    similarPrompts?: { id: string; title: string; thumbnail: string; }[];
+    similarPrompts?: { id: string; title: string; thumbnail: string; slug?: string; }[];
   };
 };
 
@@ -50,7 +42,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Updated handleCopy with Fallback for Mobile / HTTP environment
+  // ... (handleCopy aur handleShare functions bilkul same rahenge)
   const handleCopy = async (plainText: string, index: number) => {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -60,33 +52,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
         return;
       }
     } catch (err) {
-      console.log("Clipboard API failed, trying fallback...", err);
-    }
-
-    // Fallback method for mobile/HTTP environments where clipboard API is restricted
-    try {
-      const textArea = document.createElement("textarea");
-      textArea.value = plainText;
-      textArea.style.position = "fixed";
-      textArea.style.top = "0";
-      textArea.style.left = "0";
-      textArea.style.opacity = "0";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      
-      const successful = document.execCommand('copy');
-      document.body.removeChild(textArea);
-      
-      if (successful) {
-        setCopiedIndex(index);
-        setTimeout(() => setCopiedIndex(null), 2000);
-      } else {
-        alert("Failed to copy prompt.");
-      }
-    } catch (err) {
-      console.error("Fallback copy failed: ", err);
-      alert("Copy not supported on this browser.");
+      console.log("Clipboard API failed...", err);
     }
   };
 
@@ -111,24 +77,31 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
     }
   };
 
-  let categoryName = "";
-  let categoryColor = "default";
-  let categorySlug = "";
+  // 💡 Clean Category Data Extraction
+  let categoryName = "Uncategorized";
+  let categoryColor = "#F3F4F6";
+  let notionColor = "default";
+  let categorySlug = "all";
+  let categoryIconName = "LayoutDashboard";
 
   if (Array.isArray(prompt.category) && prompt.category.length > 0) {
-    categoryName = prompt.category[0].name || prompt.category[0];
-    categoryColor = prompt.category[0].color || "default";
-    categorySlug = prompt.category[0].slug || categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
+    const cat = prompt.category[0];
+    categoryName = cat.name || "Uncategorized";
+    categoryColor = cat.color || "#F3F4F6";
+    notionColor = cat.notionColor || "default";
+    categorySlug = cat.slug || categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
+    categoryIconName = cat.icon || "LayoutDashboard";
   } else if (typeof prompt.category === "object" && prompt.category !== null) {
-    categoryName = prompt.category.name;
-    categoryColor = prompt.category.color || "default";
+    categoryName = prompt.category.name || "Uncategorized";
+    categoryColor = prompt.category.color || "#F3F4F6";
+    notionColor = prompt.category.notionColor || "default";
     categorySlug = prompt.category.slug || categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
-  } else if (typeof prompt.category === "string") {
-    categoryName = prompt.category;
-    categorySlug = categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
+    categoryIconName = prompt.category.icon || "LayoutDashboard";
   }
 
-  const IconComponent = getCategoryIcon(categorySlug, categoryName);
+  const IconComponent = getDynamicIcon(categoryIconName);
+  const textColor = getCategoryIconColor(notionColor);
+
   const primaryPromptText = prompt.promptTexts[0]?.plain || "";
   const encodedPrompt = encodeURIComponent(primaryPromptText);
   const chatGptUrl = `https://chatgpt.com/?q=${encodedPrompt}`;
@@ -141,7 +114,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
           <Link href="/">Home</Link>
           <span className="sep">&gt;</span>
           {categoryName ? (
-            <Link href={`/category?category=${encodeURIComponent(categoryName)}`}>
+            <Link href={`/category?category=${categorySlug}`}>
               {categoryName}
             </Link>
           ) : (
@@ -170,20 +143,26 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
           </button>
         </div>
         
-        <div className="meta-row">
-          {categoryName && (
-            <Link 
-              href={`/category?category=${encodeURIComponent(categoryName)}`} 
-              className={`category-pill color-${categoryColor}`}
-            >
-              <IconComponent size={18} strokeWidth={2.2} />
-              <span>{categoryName}</span>
-            </Link>
-          )}
-        </div>
+      <div className="meta-row">
+        {categoryName && (
+          <Link 
+            href={`/category?category=${categorySlug}`} 
+            className="category-pill"
+            style={{ 
+              backgroundColor: categoryColor, // <-- Notion ka dynamic background hex color yahan apply hoga
+              color: textColor 
+            }}
+          >
+            <IconComponent size={18} strokeWidth={2.2} color={textColor} />
+            <span>{categoryName}</span>
+          </Link>
+        )}
+      </div>
 
         {prompt.description && <p className="prompt-subtitle">{prompt.description}</p>}
       </div>
+
+      {/* ... Baki poora code same rahega (Image, Prompt Texts, Action Buttons, Modal, Note, Similar Prompts) ... */}
 
       <div className="prompt-image-container">
         {prompt.thumbnail && (

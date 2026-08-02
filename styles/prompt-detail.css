@@ -112,8 +112,8 @@ main,
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
-  background: transparent !important;
-  padding: 0;
+  border-radius: 8px;
+  padding: 2px 8px;
 }
 
 .category-pill:hover {
