@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LayoutDashboard,
   ArrowLeft, Copy, Check, FileText, HelpCircle, X, Lightbulb,
- } from "lucide-react";
+} from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { VscOpenai } from "react-icons/vsc";
@@ -27,6 +27,8 @@ type PromptDetailProps = {
   prompt: {
     id: string;
     title: string;
+    slug: string;
+    views?: number;
     description?: string;
     category?: any;
     categorySlug?: string;
@@ -42,7 +44,31 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ... (handleCopy aur handleShare functions bilkul same rahenge)
+  // 💡 View Count Increment Effect (Jab user page kholega tab views +1 hoga)
+
+useEffect(() => {
+    const viewedKey = `viewed_${prompt.id}`;
+    if (!sessionStorage.getItem(viewedKey)) {
+      const currentViews = (prompt as any).views || 0;
+
+      fetch("/api/views", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          pageId: prompt.id, 
+          currentViews: currentViews 
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            sessionStorage.setItem(viewedKey, "true");
+          }
+        })
+        .catch((err) => console.error("Failed to update view count", err));
+    }
+  }, [prompt.id]);
+
   const handleCopy = async (plainText: string, index: number) => {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -106,7 +132,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
   const encodedPrompt = encodeURIComponent(primaryPromptText);
   const chatGptUrl = `https://chatgpt.com/?q=${encodedPrompt}`;
   const geminiUrl = `https://gemini.google.com/app`;
-
+  
   return (
     <div className="pa-prompt-detail-wrapper">
       <div className="prompt-top-bar">
@@ -149,7 +175,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
             href={`/category?category=${categorySlug}`} 
             className="category-pill"
             style={{ 
-              backgroundColor: categoryColor, // <-- Notion ka dynamic background hex color yahan apply hoga
+              backgroundColor: categoryColor,
               color: textColor 
             }}
           >
@@ -161,8 +187,6 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
 
         {prompt.description && <p className="prompt-subtitle">{prompt.description}</p>}
       </div>
-
-      {/* ... Baki poora code same rahega (Image, Prompt Texts, Action Buttons, Modal, Note, Similar Prompts) ... */}
 
       <div className="prompt-image-container">
         {prompt.thumbnail && (
@@ -265,7 +289,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
         </button>
       </div>
 
-      {/* --- HOW TO USE POPUP MODAL (Without Images) --- */}
+      {/* --- HOW TO USE POPUP MODAL --- */}
       {isModalOpen && (
         <div className="pa-modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="pa-modal-content pa-htu-modal" onClick={(e) => e.stopPropagation()}>
@@ -306,7 +330,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
         </div>
       )}
 
-      {/* --- Similar Prompts Section (Main Page pe Note ke niche) --- */}
+      {/* --- Similar Prompts Section --- */}
       {prompt.similarPrompts && prompt.similarPrompts.length > 0 && (
         <div className="similar-prompts-section">
           <h3 className="similar-section-title">Similar Prompts</h3>
@@ -320,7 +344,6 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
                 </div>
                 <h4 className="similar-title">{item.title}</h4>
                 <CTAButton href={`/prompt/${item.slug || item.id}`} className="similar-try-btn">Try Prompt</CTAButton>
-               
               </div>
             ))}
           </div>

@@ -24,7 +24,7 @@ export function mapPrompt(page: any, allCategories: Category[] = []): Prompt {
   return {
     id: page.id,
     title: getTitle(properties),
-    views: viewsValue,
+    views: properties.ViewsCount?.number ?? 0,
     slug: getSlug(properties),
     shortDescription: getShortDescription(properties),
     

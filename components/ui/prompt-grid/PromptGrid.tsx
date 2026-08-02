@@ -26,6 +26,7 @@ export default function PromptGrid({
           title={prompt.title}
           description={prompt.shortDescription}
           thumbnail={prompt.thumbnail}
+          views={prompt.views}
           category={prompt.category}
         />
       ))}
