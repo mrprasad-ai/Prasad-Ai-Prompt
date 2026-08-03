@@ -20,12 +20,14 @@
   min-height: 76px;
   margin-top: 0px;
 }
+
 .header-container {
   position: sticky;
   top: 0;
   margin-top: 0;
   z-index: 1000;
 }
+
 /* Header Bottom Gradient Accent Line */
 .pa-header::after {
   content: "";
@@ -79,7 +81,7 @@
 }
 
 .pa-logo-text {
-  font-size: 2.1rem; /* Brand name ko bada kar diya gaya hai */
+  font-size: 2.1rem;
   font-weight: 800;
   letter-spacing: 0;
   color: #111827;
@@ -92,6 +94,7 @@
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
 .pa-logo-subtitle {
   margin-top: 2px;
   font-size: 0.50rem; 
@@ -237,7 +240,7 @@
 }
 
 /* ==========================================================
-   MOBILE OVERLAY & DRAWER (JS / CSS OVERLAY)
+   MOBILE OVERLAY & DRAWER
 ========================================================== */
 
 .pa-mobile-overlay {
@@ -371,9 +374,10 @@
   }
 
   .pa-header-inner {
-    grid-template-columns: 44px 1fr 44px;
-    column-gap: 16px;
+    grid-template-columns: 40px 1fr 40px;
+    column-gap: 8px;
     min-height: 72px;
+    padding-inline: 8px;
   }
 
   .pa-header-nav,
@@ -384,15 +388,20 @@
   .pa-menu-toggle {
     display: flex;
     justify-self: start;
+    width: 40px;
+    height: 40px;
   }
 
   .pa-mobile-search {
     display: flex !important;
     justify-self: end;
+    width: 40px;
+    height: 40px;
   }
 
   .pa-logo {
     justify-self: center;
+    gap: 8px;
   }
 
   .pa-logo-content {
@@ -498,7 +507,6 @@
     margin-top: 40px;
   }
 
-  /* Social Links Section in Drawer */
   .drawer-social-section {
     margin-top: 12px;
     padding-top: 16px;
@@ -558,7 +566,6 @@
     white-space: nowrap;
   }
 
-  /* Brand Colors & Glow Shadows */
   .drawer-social-btn.instagram {
     background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
     box-shadow: 0 12px 24px -6px rgba(220, 39, 67, 0.45);
@@ -582,25 +589,42 @@
 
 /* Small Mobile Screens (Max-width: 768px) */
 @media (max-width: 768px) {
+  .header-container {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
   .pa-header-inner {
-    min-height: 68px;
+    min-height: 64px;
+    grid-template-columns:38px 1fr 38px;
+    column-gap: 4px;
   }
 
   .pa-logo-text {
-    font-size: 1.65rem; /* Mobile par brand name ko thoda chhota aur clean kar diya */
+    font-size: 1.6rem; 
   }
 
   .pa-logo-subtitle {
-    font-size: 0.4rem; 
+    font-size: 0.28rem; 
+  }
+  .pa-logo {
+    gap: 6px !important; 
+  }
+  .pa-logo-image {
+    width: 46px; 
+    height: 46px;
   }
 
-  .pa-logo-image {
-    width: 54px; 
-    height: 54px;;
+  .pa-menu-toggle,
+  .pa-mobile-search {
+    width: 42px;
+    height: 42px;
+    
   }
   
   .pa-mobile-menu {
     width: 290px;
     padding: 20px;
+    padding-left: 5px;
   }
 }

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -19,40 +18,57 @@ export default function BrowseClient({
   categories = [],
   initialCategorySlug = "all",
 }: BrowseClientProps) {
-  // 1. Slug ya Name ke bajaye ab hum Direct Category ID (slug/id match karke) state maintain karenge
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("latest");
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get("page");
+      return page && !isNaN(Number(page)) ? Number(page) : 1;
+    }
+    return 1;
+  });
   const itemsPerPage = 9;
 
-  // 2. Initial load ya URL change hone par category ko match karke uska ID set karna
+  // 💡 URL Search Params aur Back/Forward button (popstate) ko handle karne ka foolproof tarika
   useEffect(() => {
-    if (!initialCategorySlug || initialCategorySlug === "all") {
-      setSelectedCategoryId("all");
-    } else {
-      // URL ke slug se category dhoondho
-      const matchedCat = categories.find((c) => c.slug === initialCategorySlug);
-      setSelectedCategoryId(matchedCat ? matchedCat.id : "all");
-    }
-    setCurrentPage(1);
-  }, [initialCategorySlug, categories]);
+    const handleUrlChange = () => {
+      const params = new URLSearchParams(window.location.search);
+      const categorySlugFromUrl = params.get("category");
+      const pageFromUrl = params.get("page");
 
-  // 3. Filtering Logic (Ab yeh Category ID ke base par chalega, name change hone par bhi nahi tutegea)
+      if (!categorySlugFromUrl || categorySlugFromUrl === "all") {
+        setSelectedCategoryId("all");
+      } else {
+        const matchedCat = categories.find((c) => c.slug === categorySlugFromUrl);
+        setSelectedCategoryId(matchedCat ? matchedCat.id : "all");
+      }
+      
+      if (pageFromUrl && !isNaN(Number(pageFromUrl))) {
+        setCurrentPage(Number(pageFromUrl));
+      } else {
+        setCurrentPage(1);
+      }
+    };
+
+    handleUrlChange();
+    window.addEventListener("popstate", handleUrlChange);
+    return () => {
+      window.removeEventListener("popstate", handleUrlChange);
+    };
+  }, [categories]);
+
   const filteredPrompts = initialPrompts.filter((prompt) => {
     if (selectedCategoryId === "all") return true;
 
-    // Prompt ke androni relation/category structure se match karwana
     return prompt.category.some((cat: any) => {
-      // Agar category object mein ID available hai toh usse match karo
       if (cat.id) return cat.id === selectedCategoryId;
       
-      // Fallback: Agar naam se match karna pade toh safe comparison
       const targetCat = categories.find((c) => c.id === selectedCategoryId);
       return targetCat && cat.name.trim().toLowerCase() === targetCat.name.trim().toLowerCase();
     });
   });
 
-  // 4. Sorting Logic
   const sortedPrompts = [...filteredPrompts].sort((a, b) => {
     if (sortBy === "latest") {
       return (
@@ -69,7 +85,6 @@ export default function BrowseClient({
     return 0;
   });
 
-  // 5. Pagination Logic
   const totalPages = Math.ceil(sortedPrompts.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentPrompts = sortedPrompts.slice(startIndex, startIndex + itemsPerPage);
@@ -77,20 +92,48 @@ export default function BrowseClient({
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // 💡 Page change hone par URL mein page aur category dono maintain rahein
+    const params = new URLSearchParams(window.location.search);
+    if (page === 1) {
+      params.delete("page");
+    } else {
+      params.set("page", page.toString());
+    }
+
+    const query = params.toString();
+    const newUrl = query ? `/category?${query}` : "/category";
+    window.history.pushState({ page }, "", newUrl);
   };
 
   return (
     <div className="pa-category-container">
-      {/* Top Filter Controls Bar */}
       <div className="pa-filter-bar">
-        {/* Category Dropdown */}
         <div className="pa-dropdown-wrapper">
           <LayoutGrid size={18} className="pa-dropdown-icon" />
           <select
             value={selectedCategoryId}
             onChange={(e) => {
-              setSelectedCategoryId(e.target.value);
+              const newCatId = e.target.value;
+              setSelectedCategoryId(newCatId);
               setCurrentPage(1);
+
+              // 💡 Dropdown change hone par URL mein category update ho aur page reset ho jaye
+              const params = new URLSearchParams(window.location.search);
+              params.delete("page"); // Category badalte hi page 1 ho jayega
+
+              if (newCatId === "all") {
+                params.delete("category");
+              } else {
+                const targetCategory = categories.find((c) => c.id === newCatId);
+                if (targetCategory && targetCategory.slug) {
+                  params.set("category", targetCategory.slug);
+                }
+              }
+
+              const query = params.toString();
+              const newUrl = query ? `/category?${query}` : "/category";
+              window.history.pushState({}, "", newUrl);
             }}
             className="pa-filter-select"
           >
@@ -103,7 +146,6 @@ export default function BrowseClient({
           </select>
         </div>
 
-        {/* Sort Filter Dropdown */}
         <div className="pa-dropdown-wrapper">
           <Filter size={18} className="pa-dropdown-icon" />
           <select
@@ -117,7 +159,6 @@ export default function BrowseClient({
         </div>
       </div>
 
-      {/* Prompts Grid Section */}
       <div className="pa-grid-3">
         {currentPrompts.length > 0 ? (
           currentPrompts.map((prompt) => (
@@ -133,12 +174,13 @@ export default function BrowseClient({
         )}
       </div>
 
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

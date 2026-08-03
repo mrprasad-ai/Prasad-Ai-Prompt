@@ -4,7 +4,16 @@ import Link from "next/link";
 import Image from "next/image";
 import "./prompt-card.css";
 import { getCategoryIconColor } from "@/lib/notion-categories";
-import { Eye } from "lucide-react";
+import { Eye, LayoutDashboard } from "lucide-react";
+import * as LucideIcons from "lucide-react";
+
+// 💡 Dynamic Icon Helper
+function getDynamicIcon(iconName?: string) {
+  if (!iconName) return LayoutDashboard;
+  const formattedName = iconName.trim().replace(/[^a-zA-Z0-9]/g, "");
+  const FoundIcon = (LucideIcons as Record<string, any>)[formattedName];
+  return FoundIcon || LayoutDashboard;
+}
 
 export type PromptCardProps = {
   href?: string;
@@ -90,7 +99,11 @@ export default function PromptCard({
 
         {category.length > 0 && (
           <div className="prompt-card-categories">
-            {category.map((item: any) => (
+            {category.map((item: any) => {
+            // 💡 Har category ka dynamic icon fetch karein
+            const CatIcon = getDynamicIcon(item.icon);
+
+            return (
               <Link
                 key={item.name}
                 href={`/category?category=${slugifyCategory(item.name)}`}
@@ -98,12 +111,17 @@ export default function PromptCard({
                 prefetch={false}
                 style={{
                   backgroundColor: item.color, 
-                  color: getCategoryIconColor(item.notionColor || "default"), 
+                  color: getCategoryIconColor(item.notionColor || "default"),
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px" // Icon aur text ke beech thoda sa space
                 }}
               >
-                {item.name}
-              </Link>
-            ))}
+                  <CatIcon size={14} strokeWidth={2.2} />
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>

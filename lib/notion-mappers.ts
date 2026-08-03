@@ -36,12 +36,12 @@ category: matchedCategory
       slug: matchedCategory.slug,
       color: matchedCategory.color, 
       notionColor: matchedCategory.notionColor,
-      icon: matchedCategory.icon // <-- Yeh icon property yahan add karna zaroori hai!
+      icon: matchedCategory.icon 
     }] 
   : [{ name: "Uncategorized", slug: "all", color: "#F3F4F6", notionColor: "default", icon: "LayoutDashboard" }],
     
     thumbnail: getThumbnail(properties),
-    publishDate: getPublishDate(properties),
+    publishDate: page.properties.PublishDate?.date?.start || page.created_time,
     trending: isTrending(properties),
   };
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { Frown } from "lucide-react";
 import { Prompt } from "@/types/prompt";
 import PromptGrid from "@/components/ui/prompt-grid/PromptGrid";
 import Pagination from "@/components/ui/Pagination";
+import { usePaginationState } from "@/hooks/usePaginationState"; // 💡 Hook import karein
 
 type SearchClientProps = {
   prompts: Prompt[];
@@ -13,12 +14,17 @@ type SearchClientProps = {
 };
 
 export default function SearchClient({ prompts, queryParam }: SearchClientProps) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 9; // Per page prompts limit
+  const itemsPerPage = 9;
+  const { currentPage, changePage } = usePaginationState();
 
-  // Query change hone par page ko reset karke 1 par lana
+  // 💡 Sirf tabhi page 1 par reset ho jab query badle, back aane par nahi
   useEffect(() => {
-    setCurrentPage(1);
+    const params = new URLSearchParams(window.location.search);
+    const pageFromUrl = params.get("page");
+    
+    if (!pageFromUrl) {
+      changePage(1);
+    }
   }, [queryParam]);
 
   if (prompts.length === 0) {
@@ -42,11 +48,6 @@ export default function SearchClient({ prompts, queryParam }: SearchClientProps)
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentPrompts = prompts.slice(startIndex, startIndex + itemsPerPage);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <>
       <PromptGrid prompts={currentPrompts} />
@@ -55,7 +56,7 @@ export default function SearchClient({ prompts, queryParam }: SearchClientProps)
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange}
+          onPageChange={changePage}
         />
       )}
     </>

@@ -2,9 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LayoutDashboard,
-  ArrowLeft, Copy, Check, FileText, HelpCircle, X, Lightbulb,
-} from "lucide-react";
+import { LayoutDashboard, ArrowLeft, Copy, Check, FileText, HelpCircle, X, Lightbulb, Zap, CalendarHeart } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { VscOpenai } from "react-icons/vsc";
@@ -33,6 +31,7 @@ type PromptDetailProps = {
     category?: any;
     categorySlug?: string;
     thumbnail: string;
+    publishDate?: string; // 💡 Publish date type add kiya gaya hai
     promptTexts: { plain: string; html: string }[]; 
     customContentHtml?: string;
     noteText?: string;
@@ -45,8 +44,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 💡 View Count Increment Effect (Jab user page kholega tab views +1 hoga)
-
-useEffect(() => {
+  useEffect(() => {
     const viewedKey = `viewed_${prompt.id}`;
     if (!sessionStorage.getItem(viewedKey)) {
       const currentViews = (prompt as any).views || 0;
@@ -169,21 +167,35 @@ useEffect(() => {
           </button>
         </div>
         
-      <div className="meta-row">
-        {categoryName && (
-          <Link 
-            href={`/category?category=${categorySlug}`} 
-            className="category-pill"
-            style={{ 
-              backgroundColor: categoryColor,
-              color: textColor 
-            }}
-          >
-            <IconComponent size={18} strokeWidth={2.2} color={textColor} />
-            <span>{categoryName}</span>
-          </Link>
-        )}
-      </div>
+        <div className="meta-row" style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", marginTop: "10px" }}>
+          {categoryName && (
+            <Link 
+              href={`/category?category=${categorySlug}`} 
+              className="category-pill"
+              style={{ 
+                backgroundColor: categoryColor,
+                color: textColor 
+              }}
+            >
+              <IconComponent size={15} strokeWidth={2.2} color={textColor} />
+              <span>{categoryName}</span>
+            </Link>
+          )}
+
+          {/* 💡 Publish Date with Calendar Icon */}
+          {prompt.publishDate && (
+            <div className="prompt-publish-date" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: "#64748b", fontWeight: 500 }}>
+              <CalendarHeart size={15} strokeWidth={2} />
+              <span>
+                {new Date(prompt.publishDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+          )}
+        </div>
 
         {prompt.description && <p className="prompt-subtitle">{prompt.description}</p>}
       </div>
@@ -330,22 +342,35 @@ useEffect(() => {
         </div>
       )}
 
-      {/* --- Similar Prompts Section --- */}
+  {/* --- Similar Prompts Section --- */}
       {prompt.similarPrompts && prompt.similarPrompts.length > 0 && (
         <div className="similar-prompts-section">
           <h3 className="similar-section-title">Similar Prompts</h3>
           
           <div className="similar-prompts-slider">
-            {prompt.similarPrompts.map((item: any, idx: number) => (
-              <div className="similar-prompt-card" key={idx}>
-                <div className="similar-img-box">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={item.thumbnail} alt={item.title} />
-                </div>
-                <h4 className="similar-title">{item.title}</h4>
-                <CTAButton href={`/prompt/${item.slug || item.id}`} className="similar-try-btn">Try Prompt</CTAButton>
-              </div>
-            ))}
+            {prompt.similarPrompts.map((item: any, idx: number) => {
+              const cardHref = `/prompt/${item.slug || item.id}`;
+              return (
+                <Link 
+                  href={cardHref} 
+                  key={idx} 
+                  style={{ textDecoration: "none", color: "inherit", display: "block" }}
+                >
+                  <div className="similar-prompt-card" style={{ cursor: "pointer" }}>
+                    <div className="similar-img-box">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={item.thumbnail} alt={item.title} />
+                    </div>
+                    <h4 className="similar-title">{item.title}</h4>
+                    
+                    <CTAButton href={cardHref} className="similar-try-btn">
+                     <Zap size={16} />
+                     <span>Try Prompt</span>
+                    </CTAButton>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

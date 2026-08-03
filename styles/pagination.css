@@ -41,9 +41,9 @@
 
 /* Active Page Highlight (Purple Theme) */
 .pa-page-num.is-active {
-  background: #ede9fe;
-  color: #7c3aed;
-  border-color: #ddd6fe;
+  background: #ede9fe6b;
+  color: #004dff;
+  border-color: #0000001b;
   font-weight: 700;
 }
 
