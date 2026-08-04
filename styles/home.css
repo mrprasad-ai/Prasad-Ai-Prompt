@@ -899,11 +899,9 @@
         font-weight: 450;
     }
     
-.category-card:hover {
-    transform: none;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    
-}
+    .category-card:hover {
+         transform: none;
+    }
 }
 
 /* =========================================================

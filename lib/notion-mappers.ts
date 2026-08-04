@@ -11,15 +11,13 @@ import {
 export function mapPrompt(page: any, allCategories: Category[] = []): Prompt {
   const { properties } = page;
 
-  // 1. Relation ID check (Categories ya Category)
+  // 1. Notion se relation data nikalein (jisme user ki select ki gayi sequence hoti hai)
   const relationData = properties.Categories?.relation || properties.Category?.relation || [];
-  const categoryId = relationData.length > 0 ? relationData[0].id : null;
 
-  // 2. Match category from the fetched list
-  const matchedCategory = allCategories.find((cat) => cat.id === categoryId);
-
-  // 3. Extract Views directly from ViewsCount number property
-  const viewsValue = properties.ViewsCount?.number ?? 0;
+  // 2. Relation data ke order ke hisab se categories ko map karein
+  const matchedCategories = relationData
+    .map((rel: any) => allCategories.find((cat) => cat.id === rel.id))
+    .filter(Boolean); // undefined values ko hatane ke liye
 
   return {
     id: page.id,
@@ -28,17 +26,16 @@ export function mapPrompt(page: any, allCategories: Category[] = []): Prompt {
     slug: getSlug(properties),
     shortDescription: getShortDescription(properties),
     
-    // Category mapping with name, background color, and notion color support
-    // mapPrompt function ke andar:
-category: matchedCategory 
-  ? [{ 
-      name: matchedCategory.name, 
-      slug: matchedCategory.slug,
-      color: matchedCategory.color, 
-      notionColor: matchedCategory.notionColor,
-      icon: matchedCategory.icon 
-    }] 
-  : [{ name: "Uncategorized", slug: "all", color: "#F3F4F6", notionColor: "default", icon: "LayoutDashboard" }],
+    // 3. Exact wahi order return hoga jo Notion mein select kiya gaya hai
+    category: matchedCategories.length > 0 
+      ? matchedCategories.map((cat: any) => ({ 
+          name: cat.name, 
+          slug: cat.slug,
+          color: cat.color, 
+          notionColor: cat.notionColor,
+          icon: cat.icon 
+        }))
+      : [{ name: "Uncategorized", slug: "all", color: "#F3F4F6", notionColor: "default", icon: "LayoutDashboard" }],
     
     thumbnail: getThumbnail(properties),
     publishDate: page.properties.PublishDate?.date?.start || page.created_time,

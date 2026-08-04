@@ -101,6 +101,7 @@ export default function PromptCard({
           <div className="prompt-card-categories">
             {category.map((item: any) => {
             // 💡 Har category ka dynamic icon fetch karein
+            console.log("Categories received in card:", category);
             const CatIcon = getDynamicIcon(item.icon);
 
             return (

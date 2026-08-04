@@ -103,7 +103,7 @@
 }
 
 /* Responsive Support */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .pa-filter-bar {
     gap: 10px;
   }

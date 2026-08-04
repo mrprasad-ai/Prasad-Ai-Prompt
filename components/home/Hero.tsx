@@ -27,9 +27,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero-description pa-text-lg">
-            1000+ high-quality prompts for students,
-            creators, developers, marketers and
-            professionals.
+            1000+ high-quality cinematic and ultra-realistic AI prompts for students, and social media creators.
           </p>
 
           <div className="hero-search">

@@ -13,7 +13,7 @@ import HowToUseContent from "@/components/HowToUseContent";
 import CTAButton from "@/components/ui/CTAButton"; 
 import "@/styles/prompt-detail.css";
 
-// 💡 Dynamic Icon Helper (Jo Notion se aane wale icon name ko lucide-react se match karega)
+// 💡 Dynamic Icon Helper
 function getDynamicIcon(iconName?: string) {
   if (!iconName) return LayoutDashboard;
   const formattedName = iconName.trim().replace(/[^a-zA-Z0-9]/g, "");
@@ -28,10 +28,15 @@ type PromptDetailProps = {
     slug: string;
     views?: number;
     description?: string;
-    category?: any;
-    categorySlug?: string;
+    category?: {
+      name: string;
+      slug: string;
+      color: string;
+      notionColor?: string;
+      icon?: string;
+    }[];
     thumbnail: string;
-    publishDate?: string; // 💡 Publish date type add kiya gaya hai
+    publishDate?: string;
     promptTexts: { plain: string; html: string }[]; 
     customContentHtml?: string;
     noteText?: string;
@@ -43,7 +48,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 💡 View Count Increment Effect (Jab user page kholega tab views +1 hoga)
+  // 💡 View Count Increment Effect
   useEffect(() => {
     const viewedKey = `viewed_${prompt.id}`;
     if (!sessionStorage.getItem(viewedKey)) {
@@ -101,30 +106,8 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
     }
   };
 
-  // 💡 Clean Category Data Extraction
-  let categoryName = "Uncategorized";
-  let categoryColor = "#F3F4F6";
-  let notionColor = "default";
-  let categorySlug = "all";
-  let categoryIconName = "LayoutDashboard";
-
-  if (Array.isArray(prompt.category) && prompt.category.length > 0) {
-    const cat = prompt.category[0];
-    categoryName = cat.name || "Uncategorized";
-    categoryColor = cat.color || "#F3F4F6";
-    notionColor = cat.notionColor || "default";
-    categorySlug = cat.slug || categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
-    categoryIconName = cat.icon || "LayoutDashboard";
-  } else if (typeof prompt.category === "object" && prompt.category !== null) {
-    categoryName = prompt.category.name || "Uncategorized";
-    categoryColor = prompt.category.color || "#F3F4F6";
-    notionColor = prompt.category.notionColor || "default";
-    categorySlug = prompt.category.slug || categoryName.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
-    categoryIconName = prompt.category.icon || "LayoutDashboard";
-  }
-
-  const IconComponent = getDynamicIcon(categoryIconName);
-  const textColor = getCategoryIconColor(notionColor);
+  const categories = Array.isArray(prompt.category) ? prompt.category : [];
+  const primaryCategory = categories.length > 0 ? categories[0] : { name: "Prompts", slug: "all" };
 
   const primaryPromptText = prompt.promptTexts[0]?.plain || "";
   const encodedPrompt = encodeURIComponent(primaryPromptText);
@@ -137,13 +120,9 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
         <div className="breadcrumbs">
           <Link href="/">Home</Link>
           <span className="sep">&gt;</span>
-          {categoryName ? (
-            <Link href={`/category?category=${categorySlug}`}>
-              {categoryName}
-            </Link>
-          ) : (
-            <span>Prompts</span>
-          )}
+          <Link href={`/category?category=${primaryCategory.slug}`}>
+            {primaryCategory.name}
+          </Link>
           <span className="sep">&gt;</span>
           <span className="active-crumb" title={prompt.title}>{prompt.title}</span>
         </div>
@@ -167,24 +146,34 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
           </button>
         </div>
         
+        {/* 💡 Multiple Categories & Publish Date Row */}
         <div className="meta-row" style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap", marginTop: "10px" }}>
-          {categoryName && (
-            <Link 
-              href={`/category?category=${categorySlug}`} 
-              className="category-pill"
-              style={{ 
-                backgroundColor: categoryColor,
-                color: textColor 
-              }}
-            >
-              <IconComponent size={15} strokeWidth={2.2} color={textColor} />
-              <span>{categoryName}</span>
-            </Link>
-          )}
+          {categories.map((cat, idx) => {
+            const CatIcon = getDynamicIcon(cat.icon);
+            const tColor = getCategoryIconColor(cat.notionColor || "default");
+            
+            return (
+              <Link 
+                key={idx}
+                href={`/category?category=${cat.slug || "all"}`} 
+                className="category-pill"
+                style={{ 
+                  backgroundColor: cat.color || "#F3F4F6",
+                  color: tColor,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px"
+                }}
+              >
+                <CatIcon size={15} strokeWidth={2.2} color={tColor} />
+                <span>{cat.name}</span>
+              </Link>
+            );
+          })}
 
-          {/* 💡 Publish Date with Calendar Icon */}
+          {/* Publish Date with Calendar Icon */}
           {prompt.publishDate && (
-            <div className="prompt-publish-date" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: "#64748b", fontWeight: 500 }}>
+            <div className="prompt-publish-date" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", color: "#64748b", fontWeight: 500, marginLeft: categories.length > 0 ? "0px" : "0px" }}>
               <CalendarHeart size={15} strokeWidth={2} />
               <span>
                 {new Date(prompt.publishDate).toLocaleDateString("en-US", {
@@ -342,7 +331,7 @@ export default function PromptDetailClient({ prompt }: PromptDetailProps) {
         </div>
       )}
 
-  {/* --- Similar Prompts Section --- */}
+      {/* --- Similar Prompts Section --- */}
       {prompt.similarPrompts && prompt.similarPrompts.length > 0 && (
         <div className="similar-prompts-section">
           <h3 className="similar-section-title">Similar Prompts</h3>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
 import { FaInstagram, FaTelegramPlane, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { PiInfoDuotone, PiHouseLineDuotone, PiLightningDuotone, PiQrCodeDuotone, PiQuestionMarkDuotone  } from "react-icons/pi";
 
 import Container from "@/components/ui/Container";
 import Logo from "@/components/ui/Logo";
@@ -53,21 +54,27 @@ export default function Header() {
                 {/* Compact Navigation Links */}
                 <nav className="pa-mobile-nav">
                   <Link href="/" onClick={closeDrawer}>
-                    Home
+                   <PiHouseLineDuotone size={16} style={{ color: "#08df70" }}/>
+                   <span> Home</span>
                   </Link>
                   <Link href="/latest" onClick={closeDrawer}>
-                    Latest Prompts
+                   <PiLightningDuotone size={16} style={{ color: "#eb2599" }} />
+                   <span> Latest Prompts</span>
                   </Link>
                   <Link href="/category" className="categories-view-all" onClick={closeDrawer}>
-                    Categories
+                    <PiQrCodeDuotone size={16} style={{ color: "#25c0eb" }} />
+                    <span> Categories</span>
                   </Link>
                   <Link href="/how-to-use" onClick={closeDrawer}>
-                     How to use?
+                    <PiQuestionMarkDuotone size={16} style={{ color: "#f8ae0f" }} />
+                    <span> How to use?</span>
                   </Link>
                   <Link href="/about" onClick={closeDrawer}>
-                    About
+                   <PiInfoDuotone size={16} style={{ color: "#9e04e6" }} />
+                   <span> About</span>
                   </Link>
-                </nav>            
+                </nav>    
+
 
               {/* Social Links Section */}
                 <div className="drawer-social-section">

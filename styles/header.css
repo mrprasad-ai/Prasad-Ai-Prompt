@@ -301,31 +301,40 @@
   color: var(--pa-primary);
 }
 
+/* Mobile Navigation Container */
 .pa-mobile-nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 28px;
-  margin-bottom: 32px;
+  width: 100%;
 }
 
+/* Individual Navigation Links */
 .pa-mobile-nav a {
   display: flex;
-  align-items: center;
-  min-height: 48px;
-  padding: 0 14px;
-  border-radius: 12px;
-  color: var(--pa-text);
-  font-size: 1rem;
-  font-weight: 600;
+  align-items: center;     
+  gap: 10px;               
+  font-size: 0.95rem;      
+  font-weight: 500;
+  color: #4b5e7a;          
   text-decoration: none;
-  transition: background 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 💡 React Icons ke liye */
+.pa-mobile-nav a svg {
+  flex-shrink: 0;          
+  width: 18px;
+  height: 18px;   
+  fill: currentColor;     
 }
 
 .pa-mobile-nav a:hover {
-  background: #f8fafc;
-  color: var(--pa-primary);
-  padding-left: 20px;
+  background-color: #f1f5f9;
+  color: #dee8fe;
+  border-color: #2563eb;          
 }
 
 .pa-mobile-menu .pa-btn {
