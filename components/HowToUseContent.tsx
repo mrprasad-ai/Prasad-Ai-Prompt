@@ -1,15 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Sparkles, 
-  Search, 
-  Copy, 
-  Bot, 
-  Lightbulb, 
-  CheckCircle2,
-  PartyPopper
-} from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import { PiCopyDuotone, PiMagnifyingGlassDuotone, PiMagicWandDuotone, PiSparkleDuotone, PiShootingStarDuotone, PiLightbulbDuotone, 
+  PiNumberCircleOneDuotone, PiNumberCircleTwoDuotone, PiNumberCircleThreeDuotone, PiNumberCircleFourDuotone  } from "react-icons/pi";
 import "@/styles/how-to-use.css";
 
 type HowToUseContentProps = {
@@ -58,9 +52,9 @@ export default function HowToUseContent({
       <div className="htu-steps-container">
         {/* Step 1 */}
         <div className="htu-step-card">
-          <div className="htu-step-badge">1</div>
+          <div className="htu-step-badge"><PiNumberCircleOneDuotone size={30}/></div>
           <div className="htu-step-content">
-            <h2><Search size={22} /> {activeTab === "en" ? "Step 1 — Find Your Favorite Prompt" : "स्टेप 1 — अपना पसंदीदा प्रॉम्प्ट खोजें"}</h2>
+            <h2><PiMagnifyingGlassDuotone size={22} /> {activeTab === "en" ? "Step 1 — Find Your Favorite Prompt" : "स्टेप 1 — अपना पसंदीदा प्रॉम्प्ट खोजें"}</h2>
             <p>
               {activeTab === "en" 
                 ? "Browse our prompt gallery and choose the AI prompt that matches the image style you want to create." 
@@ -76,9 +70,9 @@ export default function HowToUseContent({
 
         {/* Step 2 */}
         <div className="htu-step-card">
-          <div className="htu-step-badge">2</div>
+          <div className="htu-step-badge"><PiNumberCircleTwoDuotone size={30}/></div>
           <div className="htu-step-content">
-            <h2><Copy size={22} /> {activeTab === "en" ? "Step 2 — Copy the Prompt" : "स्टेप 2 — प्रॉम्प्ट कॉपी करें"}</h2>
+            <h2><PiCopyDuotone size={22} /> {activeTab === "en" ? "Step 2 — Copy the Prompt" : "स्टेप 2 — प्रॉम्प्ट कॉपी करें"}</h2>
             <p>
               {activeTab === "en" 
                 ? "Open the selected prompt and tap the \"Copy Prompt\" button to instantly copy the complete prompt to your clipboard." 
@@ -94,9 +88,9 @@ export default function HowToUseContent({
 
         {/* Step 3 */}
         <div className="htu-step-card">
-          <div className="htu-step-badge">3</div>
+          <div className="htu-step-badge"><PiNumberCircleThreeDuotone size={30}/></div>
           <div className="htu-step-content">
-            <h2><Bot size={22} /> {activeTab === "en" ? "Step 3 — Open AI Tool & Upload Reference Photo" : "स्टेप 3 — AI टूल खोलें और रेफरेंस फोटो अपलोड करें"}</h2>
+            <h2><PiMagicWandDuotone size={22} /> {activeTab === "en" ? "Step 3 — Open AI Tool & Upload Reference Photo" : "स्टेप 3 — AI टूल खोलें और रेफरेंस फोटो अपलोड करें"}</h2>
             <p>
               {activeTab === "en" 
                 ? "Tap \"Open ChatGPT\" or \"Open Gemini\". For best results, upload a clear, high-quality reference photo along with the prompt." 
@@ -116,9 +110,9 @@ export default function HowToUseContent({
 
         {/* Step 4 */}
         <div className="htu-step-card">
-          <div className="htu-step-badge">4</div>
+          <div className="htu-step-badge"><PiNumberCircleFourDuotone size={30}/></div>
           <div className="htu-step-content">
-            <h2><Sparkles size={22} /> {activeTab === "en" ? "Step 4 — Paste & Generate" : "स्टेप 4 — पेस्ट करें और जनरेट करें"}</h2>
+            <h2><PiSparkleDuotone size={22} /> {activeTab === "en" ? "Step 4 — Paste & Generate" : "स्टेप 4 — पेस्ट करें और जनरेट करें"}</h2>
             <p>
               {activeTab === "en" 
                 ? "Paste the copied prompt into the AI tool, adjust your name/details if needed, and hit generate to get your masterpiece!" 
@@ -136,7 +130,7 @@ export default function HowToUseContent({
         <div className="htu-step-card final-result-card">
           <div className="htu-step-content htu-final-content">
             <div className="htu-final-title-row">
-              <PartyPopper size={24} className="htu-party-icon" />
+              <PiShootingStarDuotone size={24} className="htu-party-icon" />
               <h2>{activeTab === "en" ? "Final Result Generated" : "अंतिम परिणाम जनरेट हो गया 🎉"}</h2>
             </div>
             <p className="htu-final-desc">
@@ -157,7 +151,7 @@ export default function HowToUseContent({
       {showProTips && (
         <div className="htu-pro-tips-card">
           <div className="pro-tips-header">
-            <Lightbulb size={24} className="tip-icon" />
+            <PiLightbulbDuotone size={24} className="tip-icon" />
             <h3>{activeTab === "en" ? "Pro Tips 😍" : "प्रो टिप्स 😍"}</h3>
           </div>
           <p className="pro-tips-intro">
